@@ -1,0 +1,12 @@
+applications:
+- disk_quota: 1024M
+  host: cos-poc-ippei
+  name: cos-poc-ippei
+  path: .
+  domain: au-syd.mybluemix.net
+  instances: 1
+  memory: 256M
+  services:
+  - cos-ippei
+  env:
+    NODE_ENV: development
