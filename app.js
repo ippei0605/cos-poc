@@ -11,12 +11,16 @@ const
     express = require('express'),
     favicon = require('serve-favicon'),
     morgan = require('morgan'),
+    path = require('path'),
     AWS = require('ibm-cos-sdk');
 
 // アプリケーションを作成する。
 const
     app = express(),
     appEnv = cfenv.getAppEnv();
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // サービス資格情報を取得する。
 const creds = appEnv.getServiceCreds('cos-ippei');
@@ -31,18 +35,33 @@ const cos = new AWS.S3({
 app.use(morgan('combined'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
-app.get('/', (req, res) => {
+app.get('/:key', (req, res) => {
     cos.getObject({
         Bucket: 'docs-ippei',
-        Key: 'neko.pdf'
+        Key: req.params.key
     }, (error, data) => {
         if (error) {
             console.log('error', error);
             res.sendStatus(500);
         } else {
-            console.log(data.ContentType);
-            res.set('Content-Type', 'application/pdf');
+            console.log(data.ContentType, req.params.key);
+            res.set('Content-Type', data.ContentType);
             res.send(data.Body);
+        }
+    });
+});
+
+app.get('/', (req, res) => {
+    cos.listObjects({
+        Bucket: 'docs-ippei'
+    }, (error, data) => {
+        if (error) {
+            console.log('error', error);
+            res.sendStatus(500);
+        } else {
+            res.render('index', {
+                data: data
+            });
         }
     });
 });
