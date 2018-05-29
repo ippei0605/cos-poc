@@ -1,7 +1,7 @@
 'use strict';
 
 // ファイル名
-const FILENAME = 'neko.pdf';
+const FILENAME = 'red_400x400.jpg';
 
 // モジュールを読込む。
 const
