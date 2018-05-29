@@ -12,20 +12,30 @@
 <body>
 <div class="container">
   <h1>Cloud Object Storage POC</h1>
-  <%
-  const list = data && data.Contents ? data.Contents : [];
-  list.forEach(item => {
-  %>
 
-  <ul>
+  <h2>File list</h2>
+  <form method="post" action="/" enctype="multipart/form-data">
+    <div class="input-group">
+      <input type="file" class="mt-1" name="upload-file">
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </div>
+  </form>
+
+  <ol class="mt-2">
+    <%
+    const list = data && data.Contents ? data.Contents : [];
+    list.forEach(item => {
+    %>
+
     <li><a href="/<%= item.Key %>" target="_blank"><%= item.Key %></a></li>
-  </ul>
 
-  <%
-  });
-  %>
+    <%
+    });
+    %>
+  </ol>
 
   <hr>
+  <h2>Result listObjects</h2>
   <pre><%= JSON.stringify(data, undefined, 2) %></pre>
 
 
