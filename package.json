@@ -19,6 +19,7 @@
     "cfenv": "^1.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "file-type": "^8.0.0",
     "ibm-cos-sdk": "^1.2.1",
     "morgan": "^1.9.0",
     "serve-favicon": "^2.5.0"

@@ -36,9 +36,10 @@ app.use(morgan('combined'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.get('/:key', (req, res) => {
+    const key = req.params.key;
     cos.getObject({
         Bucket: 'docs-ippei',
-        Key: req.params.key
+        Key: key
     }, (error, data) => {
         if (error) {
             console.log('error', error);
