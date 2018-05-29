@@ -12,7 +12,23 @@
 <body>
 <div class="container">
   <h1>Cloud Object Storage POC</h1>
+  <%
+  const list = data && data.Contents ? data.Contents : [];
+  list.forEach(item => {
+  %>
+
+  <ul>
+    <li><a href="/<%= item.Key %>" target="_blank"><%= item.Key %></a></li>
+  </ul>
+
+  <%
+  });
+  %>
+
+  <hr>
   <pre><%= JSON.stringify(data, undefined, 2) %></pre>
+
+
 </div>
 
 </body>
