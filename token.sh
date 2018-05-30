@@ -1,0 +1,1 @@
+curl -X "POST" "https://iam.bluemix.net/oidc/token"  -H 'Accept: application/json' -H 'Content-Type: application/x-www-form-urlencoded' --data-urlencode "apikey=ServiceId-72aace76-8704-4564-b2df-859bb5c4dbac" --data-urlencode "response_type=cloud_iam" --data-urlencode "grant_type=urn:ibm:params:oauth:grant-type:apikey"

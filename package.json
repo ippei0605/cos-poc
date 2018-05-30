@@ -8,14 +8,15 @@
   },
   "scripts": {
     "login": "bx login -a https://api.au-syd.bluemix.net -c 48984e66e3b9b429a0cfe14d0637f075 -o sieg_dev -s dev",
-    "service": "bx service create cloud-object-storage lite cos-ippei",
-    "restage": "bx app restage cos-poc-ippei",
+    "service_create": "bx resource service-instance-create cos-ippei cloud-object-storage lite global",
+    "service_delete": "bx resource service-instance-delete cos-ippei --force",
     "vcap_services": "bx app env cos-poc-ippei | node node_modules/cfenv-one-liner -p VCAP_SERVICES",
     "push": "bx app push cos-poc-ippei",
     "start": "node app",
     "page": "opener https://cos-poc-ippei.au-syd.mybluemix.net/"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cfenv": "^1.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",

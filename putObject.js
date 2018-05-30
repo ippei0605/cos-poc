@@ -7,7 +7,6 @@ const FILENAME = 'red_400x400.jpg';
 const
     cfenv = require('cfenv'),
     fs = require('fs'),
-    fileType = require('file-type'),
     AWS = require('ibm-cos-sdk');
 
 // アプリケーションを作成する。

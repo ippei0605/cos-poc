@@ -1,7 +1,50 @@
 # Cloud Object Storage POC
 
-## 準備
+## システム要件
+* Node.js
+  - 8 以上
+* bx (IBM Cloud Bluemix CLI)
 
+
+## 準備
+1. [package.json](./package.json) の `scripts` と [manifest.yml](./manifest.yml) を自身の環境に変更する。
+
+1. ログインする。
+
+  ```
+  $ npm run login
+  ```
+  > Email, Password を入力する。
+
+1. COS サービスインスタンスを作成する。
+
+  ```
+  $ npm run service
+  ```
+
+1. POC アプリをプッシュする。
+
+  ```
+  $ npm run push
+  ```
+
+1. 環境変数 VCAP_SERVICES をローカルマシンに設定する。次のコマンドで VCAP_SERVICES を表示できる。
+
+  ```
+  $ npm run vcap_services
+  ```
+
+1. Bucket を作成する。 (docs-ippei)
+
+  ```
+  $ node createBucket
+  ```
+
+1. ブラウザで POC アプリを起動する。
+
+  ```
+  $ npm run page
+  ```
 
 ## 実験
 ローカル,  IBM Cloud CF (au-syd)
@@ -17,15 +60,7 @@
   - s3-api.wdc-us-geo.objectstorage.service.networklayer.com
   - s3-api.sjc-us-geo.objectstorage.service.networklayer.com
 
-### サービスを作成する
 
-* COS サービスインスタンス
-
-    ```
-    $ npm run service
-    ```
-
-    - cos-ippei インスタンスが作成される。
 
 * Object Storage
 

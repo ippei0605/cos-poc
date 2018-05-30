@@ -5,6 +5,12 @@
 
 'use strict';
 
+const
+    ENDPOINT = 's3.us-south.objectstorage.softlayer.net',
+    BUCKET = 'docs-ippei2',
+    API_KEY = 'lIxD6Hd77k8D9vdu8lVWdKGXPwaNTYnVZcgVxUOGMrMl';
+
+
 // モジュールを読込む。
 const
     cfenv = require('cfenv'),
@@ -26,8 +32,8 @@ const creds = appEnv.getServiceCreds('cos-ippei');
 
 // COS オブジェクトを作成する。
 const cos = new AWS.S3({
-    endpoint: 's3-api.us-geo.objectstorage.softlayer.net',
-    apiKeyId: creds.apikey
+    endpoint: ENDPOINT,
+    apiKeyId: 'ss4-31Ra7hNaxW7QNpBFtarJ9oAWrvqtOJjEgKj6utmz'
 });
 
 // ファイルアップロードを設定する。
@@ -43,7 +49,7 @@ app.post('/', upload.single('upload-file'), (req, res) => {
     const uploadFile = fs.createReadStream(req.file.path);
 
     cos.putObject({
-        Bucket: 'docs-ippei',
+        Bucket: BUCKET,
         Key: req.file.originalname,
         Body: uploadFile,
         ContentType: req.file.mimetype
@@ -61,7 +67,7 @@ app.post('/', upload.single('upload-file'), (req, res) => {
 app.get('/:key', (req, res) => {
     const key = req.params.key;
     cos.getObject({
-        Bucket: 'docs-ippei',
+        Bucket: BUCKET,
         Key: key
     }, (error, data) => {
         if (error) {
@@ -77,7 +83,7 @@ app.get('/:key', (req, res) => {
 
 app.get('/', (req, res) => {
     cos.listObjects({
-        Bucket: 'docs-ippei'
+        Bucket: BUCKET
     }, (error, data) => {
         if (error) {
             console.log('error', error);
