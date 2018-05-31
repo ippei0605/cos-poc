@@ -2,7 +2,7 @@
 
 ## はじめに
 * Cloud Foundry アプリから Cloud Object Storage (以下、COS) の利用を検証する。
-* `manaBrain` の拡張を考慮して、Node.js Client Library を使用する。
+* Node.js 推しなので、Node.js Client Library を使用する。
   - IBM Docs https://console.bluemix.net/docs/services/cloud-object-storage/libraries/node.html#using-node-js
   - NPM https://www.npmjs.com/package/ibm-cos-sdk
 
