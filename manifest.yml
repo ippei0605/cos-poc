@@ -6,8 +6,5 @@ applications:
   domain: au-syd.mybluemix.net
   instances: 1
   memory: 256M
-  env:
-    NODE_ENV: development
-    ENDPOINT: s3-api.us-geo.objectstorage.softlayer.net
-    APIKEY: a7CxwHCJSCpL1aiij08TBdbQvHrIymcYD3bf2AhRKmZW
-    RESOURCE_INSTANCE_ID: 'crn:v1:bluemix:public:cloud-object-storage:global:a/48984e66e3b9b429a0cfe14d0637f075:a2f41fbe-590a-4c7f-8c00-dfb54bc046c8::'
+  services:
+    - cos-ippei-alias

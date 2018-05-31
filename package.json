@@ -10,11 +10,14 @@
     "login": "bx login -a https://api.au-syd.bluemix.net -c 48984e66e3b9b429a0cfe14d0637f075 -o sieg_dev -s dev",
     "service_create": "bx resource service-instance-create cos-ippei cloud-object-storage lite global",
     "service_delete": "bx resource service-instance-delete cos-ippei --force",
+    "alias_create": "bx resource service-alias-create cos-ippei-alias --instance-name cos-ippei",
+    "alias_delete": "bx resource service-alias-delete cos-ippei-alias --force",
     "key_create": "bx resource service-key-create cos-ippei-key Manager --instance-name cos-ippei -p '{\"HMAC\":true}'",
     "key_delete": "bx resource service-key-delete cos-ippei-key --force",
     "push": "bx app push cos-poc-ippei",
     "start": "node app",
-    "page": "opener https://cos-poc-ippei.au-syd.mybluemix.net/"
+    "page": "opener https://cos-poc-ippei.au-syd.mybluemix.net/",
+    "vcap_services": "bx app env cos-poc-ippei | node node_modules/cfenv-one-liner -p VCAP_SERVICES"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -26,9 +29,11 @@
     "ibm-cos-sdk": "^1.2.1",
     "morgan": "^1.9.0",
     "multer": "^1.3.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "vcap_services": "^0.3.4"
   },
   "devDependencies": {
+    "cfenv-one-liner": "0.0.2",
     "opener": "^1.4.3"
   }
 }

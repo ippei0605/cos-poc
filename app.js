@@ -12,7 +12,8 @@ const
     express = require('express'),
     favicon = require('serve-favicon'),
     morgan = require('morgan'),
-    path = require('path');
+    path = require('path'),
+    context = require('./context');
 
 // アプリケーションを作成する。
 const
@@ -28,6 +29,6 @@ app.set('view engine', 'ejs');
 app.use('/', require('./routes'));
 
 // リクエトを受付ける。
-app.listen(appEnv.port, () => {
-    console.log("server starting on " + appEnv.url);
+app.listen(context.PORT, () => {
+    console.log("server starting on " + context.URL);
 });

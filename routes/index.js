@@ -2,16 +2,32 @@
  * Cloud Object Storage PoC: ルーティング
  * @module routes/index
  * @author Ippei SUZUKI
+ * @see {@link https://www.npmjs.com/package/ibm-cos-sdk}
  */
 
 'use strict';
+
+/**
+ * エンドポイントを設定する。
+ * @type {string}
+ * @see {@link https://console.bluemix.net/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints}
+ */
+const ENDPOINT = 's3-api.us-geo.objectstorage.softlayer.net';
+
+/**
+ * ストレージクラスを設定する。(エンドポイントにより選択できるストレージクラスが異なる。)
+ * @type {string}
+ * @see {@link https://console.bluemix.net/docs/services/cloud-object-storage/basics/classes.html#use-storage-classes}
+ */
+const STORAGE_CLASS = 'us-standard';
 
 // モジュールを読込む。
 const
     express = require('express'),
     fs = require('fs'),
     multer = require('multer'),
-    AWS = require('ibm-cos-sdk');
+    AWS = require('ibm-cos-sdk'),
+    context = require('../context');
 
 // ルーターを作成する。
 const router = express.Router();
@@ -24,12 +40,12 @@ const upload = multer({
 
 // COS オブジェクトを作成する。
 const cos = new AWS.S3({
-    endpoint: process.env.ENDPOINT,
-    apiKeyId: process.env.APIKEY,
-    serviceInstanceId: process.env.RESOURCE_INSTANCE_ID
+    endpoint: ENDPOINT,
+    apiKeyId: context.APIKEY,
+    serviceInstanceId: context.RESOURCE_INSTANCE_ID
 });
 
-/* Bucket の一覧を表示する。 */
+// Bucket の一覧を表示する。
 router.get('/', (req, res) => {
     cos.listBuckets({}, (error, data) => {
         if (error) {
@@ -43,12 +59,12 @@ router.get('/', (req, res) => {
     });
 });
 
-/* Bucket を作成する。 */
+// Bucket を作成する。
 router.post('/', (req, res) => {
     cos.createBucket({
         Bucket: req.body.bucket,
         CreateBucketConfiguration: {
-            LocationConstraint: 'us-standard'
+            LocationConstraint: STORAGE_CLASS
         }
     }, (error, data) => {
         const result = {
@@ -67,7 +83,7 @@ router.post('/', (req, res) => {
     });
 });
 
-/* Bucket を削除する。 */
+// Bucket を削除する。
 router.get('/:bucket/delete', (req, res) => {
     cos.deleteBucket({
         Bucket: req.params.bucket
@@ -88,7 +104,7 @@ router.get('/:bucket/delete', (req, res) => {
     });
 });
 
-/* Object の一覧を表示する。 */
+// Object の一覧を表示する。
 router.get('/:bucket', (req, res) => {
     cos.listObjects({
         Bucket: req.params.bucket
@@ -104,7 +120,7 @@ router.get('/:bucket', (req, res) => {
     });
 });
 
-/* Object をアップロードする。 */
+// Object をアップロードする。
 router.post('/:bucket', upload.single('upload-file'), (req, res) => {
     const result = {
         backUrl: `/${req.params.bucket}`
@@ -129,7 +145,7 @@ router.post('/:bucket', upload.single('upload-file'), (req, res) => {
     });
 });
 
-/* Object を表示する。 */
+// Object を表示する。
 router.get('/:bucket/:key', (req, res) => {
     const
         bucket = req.params.bucket,
@@ -149,7 +165,7 @@ router.get('/:bucket/:key', (req, res) => {
     });
 });
 
-/* Object を削除する。 */
+// Object を削除する。
 router.get('/:bucket/:key/delete', (req, res) => {
     const
         bucket = req.params.bucket,
