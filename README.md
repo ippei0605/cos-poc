@@ -12,7 +12,7 @@
 * bx (IBM Cloud Bluemix CLI)
 
 ## 環境構築手順
-1. [package.json](./package.json) の `scripts` を自身の環境に変更する。
+1. [package.json](./package.json) の `scripts` と [manifest.yml](./manifest.yml) を自身の環境に変更する。
 
 1. ログインする。
 
