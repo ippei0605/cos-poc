@@ -60,8 +60,9 @@
 
 ## まとめ
 * `ibm-cos-sdk` により、COS の Bucket および Object を操作できた。
-  - Object を作成 (putObject) する際、ContentType をセットしておけば、Object の取得 (getObject) 時にも利用できる。
+  - Bucket 名は IBM Cloud 内でユニークにする必要がある。
   - Bucket を削除した後、同名で再作成すると 409 エラー (BucketAlreadyExists) になる。完全に削除するのに 十数分を要する模様。
+  - Object を作成 (putObject) する際、ContentType をセットしておけば、Object の取得 (getObject) 時にも利用できる。
 * Cloud Foundry アプリからアクセスする場合は Public な Endpoint を指定する。(VCAP_SERVICES にはセットされていない値)
   - https://console.bluemix.net/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints
 *  COS は Cloud Foundry Services ではなく Resources のため注意すること。
