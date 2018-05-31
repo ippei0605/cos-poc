@@ -1,100 +1,31 @@
 /**
- * @file Cloud Object Storage POC
+ * @file Cloud Object Storage PoC
  * @author Ippei SUZUKI
  */
 
 'use strict';
 
-const
-    ENDPOINT = 's3.us-south.objectstorage.softlayer.net',
-    BUCKET = 'docs-ippei2',
-    API_KEY = 'lIxD6Hd77k8D9vdu8lVWdKGXPwaNTYnVZcgVxUOGMrMl';
-
-
 // モジュールを読込む。
 const
+    bodyParser = require('body-parser'),
     cfenv = require('cfenv'),
     express = require('express'),
     favicon = require('serve-favicon'),
-    fs = require('fs'),
     morgan = require('morgan'),
-    multer = require('multer'),
-    path = require('path'),
-    AWS = require('ibm-cos-sdk');
+    path = require('path');
 
 // アプリケーションを作成する。
 const
     app = express(),
     appEnv = cfenv.getAppEnv();
 
-// サービス資格情報を取得する。
-const creds = appEnv.getServiceCreds('cos-ippei');
-
-// COS オブジェクトを作成する。
-const cos = new AWS.S3({
-    endpoint: ENDPOINT,
-    apiKeyId: 'ss4-31Ra7hNaxW7QNpBFtarJ9oAWrvqtOJjEgKj6utmz'
-});
-
-// ファイルアップロードを設定する。
-const upload = multer({dest: path.join(__dirname, 'uploads')});
-
 // ミドルウェアを設定する。
 app.use(morgan('combined'));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-app.post('/', upload.single('upload-file'), (req, res) => {
-    const uploadFile = fs.createReadStream(req.file.path);
-
-    cos.putObject({
-        Bucket: BUCKET,
-        Key: req.file.originalname,
-        Body: uploadFile,
-        ContentType: req.file.mimetype
-    }, (error, data) => {
-        if (error) {
-            console.log('error', error);
-        } else {
-            console.log(data);
-        }
-        res.redirect('/');
-    });
-});
-
-
-app.get('/:key', (req, res) => {
-    const key = req.params.key;
-    cos.getObject({
-        Bucket: BUCKET,
-        Key: key
-    }, (error, data) => {
-        if (error) {
-            console.log('error', error);
-            res.sendStatus(500);
-        } else {
-            console.log(data.ContentType, req.params.key);
-            res.set('Content-Type', data.ContentType);
-            res.send(data.Body);
-        }
-    });
-});
-
-app.get('/', (req, res) => {
-    cos.listObjects({
-        Bucket: BUCKET
-    }, (error, data) => {
-        if (error) {
-            console.log('error', error);
-            res.sendStatus(500);
-        } else {
-            res.render('index', {
-                data: data
-            });
-        }
-    });
-});
+app.use('/', require('./routes'));
 
 // リクエトを受付ける。
 app.listen(appEnv.port, () => {

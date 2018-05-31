@@ -1,10 +1,12 @@
 # Cloud Object Storage POC
 
-## システム要件
+## はじめに
+*
+
+## ローカル環境のシステム要件
 * Node.js
   - 8 以上
 * bx (IBM Cloud Bluemix CLI)
-
 
 ## 準備
 1. [package.json](./package.json) の `scripts` と [manifest.yml](./manifest.yml) を自身の環境に変更する。

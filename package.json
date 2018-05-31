@@ -1,7 +1,7 @@
 {
   "name": "cos-poc",
   "version": "0.0.1",
-  "description": "Cloud Object Storage POC",
+  "description": "Cloud Object Storage PoC",
   "private": true,
   "engines": {
     "node": "8.9.4"
@@ -10,13 +10,15 @@
     "login": "bx login -a https://api.au-syd.bluemix.net -c 48984e66e3b9b429a0cfe14d0637f075 -o sieg_dev -s dev",
     "service_create": "bx resource service-instance-create cos-ippei cloud-object-storage lite global",
     "service_delete": "bx resource service-instance-delete cos-ippei --force",
-    "vcap_services": "bx app env cos-poc-ippei | node node_modules/cfenv-one-liner -p VCAP_SERVICES",
+    "key_create": "bx resource service-key-create cos-ippei-key Manager --instance-name cos-ippei -p '{\"HMAC\":true}'",
+    "key_delete": "bx resource service-key-delete cos-ippei-key --force",
     "push": "bx app push cos-poc-ippei",
     "start": "node app",
     "page": "opener https://cos-poc-ippei.au-syd.mybluemix.net/"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "cfenv": "^1.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
@@ -27,7 +29,6 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "cfenv-one-liner": "0.0.2",
     "opener": "^1.4.3"
   }
 }
