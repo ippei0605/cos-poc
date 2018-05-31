@@ -16,38 +16,38 @@
 
 1. ログインする。
 
-  ```
-  $ npm run login
-  ```
-  > Email, Password を入力する。
+    ```
+    $ npm run login
+    ```
+    > Email, Password を入力する。
 
 1. COS サービスインスタンスを作成する。
 
-  ```
-  $ npm run service_create
-  ```
-  > 削除コマンドも用意している。 `npm run service_delete`
+    ```
+    $ npm run service_create
+    ```
+    > 削除コマンドも用意している。 `npm run service_delete`
 
 
 1. COS サービスインスタンスのエイリアスを作成する。(Cloud Foundry アプリとバインドするため。)
 
-  ```
-  $ npm run alias_create
-  ```
-  > 削除コマンドも用意している。 `npm run alias_delete`
+    ```
+    $ npm run alias_create
+    ```
+    > 削除コマンドも用意している。 `npm run alias_delete`
 
 
 1. アプリをプッシュする。
 
-  ```
-  $ npm run push
-  ```
+    ```
+    $ npm run push
+    ```
 
 1. ブラウザでアプリを起動する。
 
-  ```
-  $ npm run page
-  ```
+    ```
+    $ npm run page
+    ```
 
 ## アプリの機能
 * Bucket の一覧表示
