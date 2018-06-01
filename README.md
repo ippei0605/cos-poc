@@ -68,6 +68,8 @@
     - https://console.bluemix.net/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints
 *  COS は Cloud Foundry Services ではなく Resources のため注意すること。
     - IBM Cloud Dashboard では Services に分類される。
+    - CLI でサービスインスタンスを作成する場合は、`bx resource service-instance-create` コマンドで作成する。
+        - `bx service create` だと、指定した名前でエイリアス、ランダム文字列でサービスインスタンスが作成されるが、マニュアルに記載されていないので使用しない方が良いだろう。
 * Cloud Foundry アプリと COS サービスインスタンスは直接バインドできないのでエイリアスを作成する必要がある。
     - VCAP_SERVICES を介さず、直接 COS サービスインスタンスにアクセスする場合は、サービスキーを作成する。
 
