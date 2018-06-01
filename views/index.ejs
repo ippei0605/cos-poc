@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-          integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-          crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
 </head>
 
 <body>
 <div class="container">
-  <h1>Cloud Object Storage PoC</h1>
+    <h1>Cloud Object Storage PoC</h1>
 
-  <form method="post" action="/">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Please enter a bucket name." name="bucket">
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit">Create bucket</button>
-      </div>
-    </div>
+    <form method="post" action="/">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Please enter a bucket name." name="bucket">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Create bucket</button>
+            </div>
+        </div>
 
-  </form>
+    </form>
 
-  <h2>Buckets</h2>
-  <ol class="mt-2">
-    <%
-    const list = data && data.Buckets ? data.Buckets : [];
-    list.forEach(item => {
-    %>
+    <h2>Buckets</h2>
+    <ol class="mt-2">
+        <%
+        const list = data && data.Buckets ? data.Buckets : [];
+        list.forEach(item => {
+        %>
 
-    <li class="mt-2">
-      <a href="/<%= item.Name %>"><%= item.Name %></a>
-      <button onclick="location.href='/<%= item.Name %>/delete'" type="submit"
-              class="btn btn-outline-danger btn-sm ml-2">Delete
-      </button>
-    </li>
+        <li class="mt-2">
+            <a href="/<%= item.Name %>"><%= item.Name %></a>
+            <button onclick="location.href='/<%= item.Name %>/delete'" type="submit"
+                    class="btn btn-outline-danger btn-sm ml-2">Delete
+            </button>
+        </li>
 
-    <%
-    });
-    %>
-  </ol>
+        <%
+        });
+        %>
+    </ol>
 
-  <hr>
-  <h2>Result listBuckets</h2>
-  <pre><%= JSON.stringify(data, undefined, 2) %></pre>
+    <hr>
+    <h2>Result listBuckets</h2>
+    <pre><%= JSON.stringify(data, undefined, 2) %></pre>
 
 
 </div>

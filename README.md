@@ -66,6 +66,8 @@
     - Object を作成 (putObject) する際、ContentType をセットしておけば、Object の取得 (getObject) 時にも利用できる。
 * Cloud Foundry アプリからアクセスする場合は Public な Endpoint を指定する。(VCAP_SERVICES にはセットされていない値)
     - https://console.bluemix.net/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints
+    - エンドポイントにより選択できるストレージクラスが異なるので注意すること。
+        - https://console.bluemix.net/docs/services/cloud-object-storage/basics/classes.html#use-storage-classes
 *  COS は Cloud Foundry Services ではなく Resources のため注意すること。
     - IBM Cloud Dashboard では Services に分類される。
     - CLI でサービスインスタンスを作成する場合は、`bx resource service-instance-create` コマンドで作成する。
