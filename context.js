@@ -1,5 +1,5 @@
 /**
- * loud Object Storage PoC: コンテキスト
+ * Cloud Object Storage PoC: コンテキスト
  * @module utils/context
  * @author Ippei SUZUKI
  */
